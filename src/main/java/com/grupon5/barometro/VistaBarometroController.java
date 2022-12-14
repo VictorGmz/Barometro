@@ -24,10 +24,6 @@ import javafx.scene.image.ImageView;
  */
 public class VistaBarometroController implements Initializable {
 
-    
-    DatosIniBarometro b = new DatosIniBarometro();
-    ObservableList<Barometro> listaObservable = b.getBarometro();
-    
     @FXML
     private Button btnNuevo;
     @FXML
