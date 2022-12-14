@@ -5,11 +5,7 @@
 package com.grupon5.barometro;
 
 import java.util.Objects;
-import javafx.beans.Observable;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.util.Callback;
-import javafx.util.converter.LocalDateStringConverter;
+import javafx.scene.control.DatePicker;
 import javafx.util.converter.LocalDateTimeStringConverter;
 
 /**
@@ -18,76 +14,20 @@ import javafx.util.converter.LocalDateTimeStringConverter;
  */
 public class Barometro {
     
-    private LocalDateStringConverter date;
+    private final double CONSTANTE =132925.5;
+    private DatePicker fecha;
     private LocalDateTimeStringConverter hora;
-    private IntegerProperty altura;
-    private DoubleProperty presion;
-    
-    private String dateS;
-    private String horaS;
-    private String alturaS;
-    private String presionS;
-    
-    public Barometro(LocalDateStringConverter date, LocalDateTimeStringConverter hora, IntegerProperty altura, DoubleProperty presion) {
-        this.date = date;
+    private double altura;
+    private double presion;
+
+    public Barometro(DatePicker fecha, LocalDateTimeStringConverter hora, double altura) {
+        this.fecha = fecha;
         this.hora = hora;
         this.altura = altura;
-        this.presion = presion;
-    }
-    
-      public Barometro(String date, String hora, String altura, String presion) {
-          this.dateS=date;
-          this.horaS=hora;
-          this.alturaS=altura;
-          this.presionS= presion;
-    }
-    
-    
-    public static Callback<Barometro, Observable[]> extractor = 
-            b -> new Observable[]{
-                b.getAltura(),b.getPresion()
-            
-    };
-    public LocalDateStringConverter getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateStringConverter date) {
-        this.date = date;
-    }
-
-    public LocalDateTimeStringConverter getHora() {
-        return hora;
-    }
-
-    public void setHora(LocalDateTimeStringConverter hora) {
-        this.hora = hora;
-    }
-
-    public IntegerProperty getAltura() {
-        return altura;
-    }
-
-    public void setAltura(IntegerProperty altura) {
-        this.altura = altura;
-    }
-
-    public DoubleProperty getPresion() {
-        return presion;
-    }
-
-    public void setPresion(DoubleProperty presion) {
-        this.presion = presion;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.date);
-        hash = 29 * hash + Objects.hashCode(this.hora);
-        hash = 29 * hash + Objects.hashCode(this.altura);
-        hash = 29 * hash + Objects.hashCode(this.presion);
-        return hash;
+        if(altura<=0){
+            altura = 0.76;
+            this.presion = altura*CONSTANTE;
+        }
     }
 
     @Override
@@ -102,19 +42,47 @@ public class Barometro {
             return false;
         }
         final Barometro other = (Barometro) obj;
-        if (!Objects.equals(this.date, other.date)) {
+        if (Double.doubleToLongBits(this.altura) != Double.doubleToLongBits(other.altura)) {
             return false;
         }
-        if (!Objects.equals(this.hora, other.hora)) {
+        if (Double.doubleToLongBits(this.presion) != Double.doubleToLongBits(other.presion)) {
             return false;
         }
-        if (!Objects.equals(this.altura, other.altura)) {
+        if (!Objects.equals(this.fecha, other.fecha)) {
             return false;
         }
-        if (!Objects.equals(this.presion, other.presion)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.hora, other.hora);
     }
-    
+
+    public DatePicker getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(DatePicker date) {
+        this.fecha = date;
+    }
+
+    public LocalDateTimeStringConverter getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalDateTimeStringConverter hora) {
+        this.hora = hora;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public double getPresion() {
+        return presion;
+    }
+
+    public void setPresion(double presion) {
+        this.presion = presion;
+    }
 }
