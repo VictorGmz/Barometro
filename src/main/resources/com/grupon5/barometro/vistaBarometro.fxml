@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -47,7 +48,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfPresion" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfPresion" editable="false" GridPane.columnIndex="1" />
                         <TextField fx:id="tfAltura" prefHeight="25.0" prefWidth="216.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label prefHeight="42.0" prefWidth="138.0" text="Fecha" GridPane.rowIndex="2">
                            <font>
@@ -59,8 +60,8 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="dpFecha" prefHeight="25.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <DatePicker fx:id="dpHora" prefHeight="25.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <DatePicker fx:id="dpFecha" editable="false" prefHeight="25.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbHora" prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <Button id="btnNuevo" fx:id="btnNuevo" layoutX="27.0" layoutY="342.0" mnemonicParsing="false" onAction="#accionBotonNuevo" prefHeight="42.0" prefWidth="103.0" text="Añadir" />

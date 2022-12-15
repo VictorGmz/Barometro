@@ -4,6 +4,7 @@
  */
 package com.grupon5.barometro;
 
+import static java.lang.Math.pow;
 import java.util.Objects;
 import javafx.scene.control.DatePicker;
 import javafx.util.converter.LocalDateTimeStringConverter;
@@ -14,20 +15,25 @@ import javafx.util.converter.LocalDateTimeStringConverter;
  */
 public class Barometro {
     
-    private final double CONSTANTE =132925.5;
-    private DatePicker fecha;
-    private LocalDateTimeStringConverter hora;
+    private final double CONSTANTE =1013.25;
+    private String fecha;
+    private String hora;
     private double altura;
     private double presion;
 
-    public Barometro(DatePicker fecha, LocalDateTimeStringConverter hora, double altura) {
+    @Override
+    public String toString() {
+        return fecha + " " + hora + "\nAltura: " + altura + "\nPresion: " + presion ;
+    }
+
+    public Barometro(String fecha, String hora, double altura) {
         this.fecha = fecha;
         this.hora = hora;
         this.altura = altura;
         if(altura<=0){
-            altura = 0.76;
-            this.presion = altura*CONSTANTE;
+            altura = 0;
         }
+        this.presion = CONSTANTE*(pow(1-0.0000225577*altura,5.2559));
     }
 
     @Override
@@ -54,19 +60,19 @@ public class Barometro {
         return Objects.equals(this.hora, other.hora);
     }
 
-    public DatePicker getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(DatePicker date) {
+    public void setFecha(String date) {
         this.fecha = date;
     }
 
-    public LocalDateTimeStringConverter getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(LocalDateTimeStringConverter hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
