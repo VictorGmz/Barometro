@@ -5,6 +5,7 @@
 package com.grupon5.barometro;
 
 import static java.lang.Math.pow;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -16,8 +17,9 @@ public class Barometro {
     private final double CONSTANTE =1013.25;
     private String fecha;
     private String hora;
-    private double altura;
+    private int altura;
     private double presion;
+    private LocalDate fechaLocal;
 
     @Override
     public String toString() {
@@ -26,8 +28,7 @@ public class Barometro {
                 " m\nPresión: " + ((double)Math.round(presion * 100d) / 100d) +
                 " mbar\nPresión: " + ((double)Math.round((presion/1.333300001162309)*100d)/100d) +" mmHg";
     }
-
-    public Barometro(String fecha, String hora, double altura) {
+ public Barometro(String fecha, String hora, int altura) {
         this.fecha = fecha;
         this.hora = hora;
         this.altura = altura;
@@ -36,7 +37,23 @@ public class Barometro {
         }
         this.presion = CONSTANTE*(pow(1-0.0000225577*altura,5.2559));
     }
+    public Barometro(String fecha, String hora, int altura, LocalDate ld) {
+        this.fecha = fecha;
+        this.hora = hora;
+        this.altura = altura;
+        if(altura<=0){
+            altura = 0;
+        }
+        this.presion = CONSTANTE*(pow(1-0.0000225577*altura,5.2559));
+        this.fechaLocal = ld;
+    }
 
+    public LocalDate getFechaLocal(){
+        return fechaLocal;
+    }
+    public void setFechaLocal(LocalDate ld){
+        this.fechaLocal = ld;
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -77,11 +94,11 @@ public class Barometro {
         this.hora = hora;
     }
 
-    public double getAltura() {
+    public int getAltura() {
         return altura;
     }
 
-    public void setAltura(double altura) {
+    public void setAltura(int altura) {
         this.altura = altura;
     }
 
