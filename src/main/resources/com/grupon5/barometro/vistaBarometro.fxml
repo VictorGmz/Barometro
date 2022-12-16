@@ -66,7 +66,7 @@
                   </GridPane>
                   <Button id="btnNuevo" fx:id="btnNuevo" layoutX="27.0" layoutY="342.0" mnemonicParsing="false" onAction="#accionBotonNuevo" prefHeight="42.0" prefWidth="103.0" text="Añadir" />
                   <Button id="btnBorrar" fx:id="btnBorrar" layoutX="138.0" layoutY="342.0" mnemonicParsing="false" onAction="#accionBotonBorrar" prefHeight="42.0" prefWidth="103.0" text="Borrar" />
-                  <Button fx:id="btnActualizar" layoutX="249.0" layoutY="342.0" mnemonicParsing="false" onAction="#accionBotonActualizar" prefHeight="42.0" prefWidth="103.0" text="Actualizar" />
+                  <Button fx:id="btnActualizar" layoutX="249.0" layoutY="342.0" mnemonicParsing="false" onAction="#accionBotonActualizar" prefHeight="42.0" prefWidth="103.0" text="Predicción" />
                </children>
             </AnchorPane>
          </items>

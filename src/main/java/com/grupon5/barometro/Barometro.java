@@ -6,8 +6,6 @@ package com.grupon5.barometro;
 
 import static java.lang.Math.pow;
 import java.util.Objects;
-import javafx.scene.control.DatePicker;
-import javafx.util.converter.LocalDateTimeStringConverter;
 
 /**
  *
@@ -23,7 +21,10 @@ public class Barometro {
 
     @Override
     public String toString() {
-        return fecha + " " + hora + "\nAltura: " + altura + "\nPresion: " + presion ;
+        return fecha + " " + hora +
+                "\nAltura: " + altura +
+                " m\nPresión: " + ((double)Math.round(presion * 100d) / 100d) +
+                " mbar\nPresión: " + ((double)Math.round((presion/1.333300001162309)*100d)/100d) +" mmHg";
     }
 
     public Barometro(String fecha, String hora, double altura) {

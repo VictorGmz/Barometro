@@ -12,12 +12,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -66,27 +66,50 @@ public class VistaBarometroController implements Initializable {
         "23:00");
         cbHora.setItems(combo);
         
-        //lvLista.getSelectionModel().select(lvLista.);
+        
+        
+        tfAltura.textProperty().addListener((ov, old, neew) -> {
+            if (neew != "") {//Se comprueba que el nuevo valor no sea "" o nulo
+                //NO DEJA TECLEAR NINGUN CHAR DISTINTO DE 0-9
+                if (soloNumeros(neew)) {
+                } else {tfAltura.setText(old);}
+            } else {tfAltura.setText("");}//En caso en el que neew sea "" o nulo, nos pondrá el valor a 0
+        });
     }    
 
     @FXML
     private void accionBotonNuevo(ActionEvent event) {
-        Barometro b = new Barometro(dpFecha.getValue().toString()
+        Barometro aux = new Barometro(dpFecha.getValue().toString()
                 ,cbHora.getValue().toString(),
                 Double.parseDouble(tfAltura.getText()));
-        listaObs.add(b);
-        presiones.add(b);
-        tfPresion.setText(b.getPresion()+"");
+        if (!listaObs.contains(aux)) {
+            listaObs.add(new Barometro(dpFecha.getValue().toString()
+                ,cbHora.getValue().toString(),
+                Double.parseDouble(tfAltura.getText())));
+            presiones.add(aux);
+        } else {
+            aux = null;
+            Alert a = new Alert(Alert.AlertType.WARNING);
+            a.setContentText("¡¡Medidas repetidas!!");
+            a.show();
+        }
+        
+        tfPresion.setText(((double)Math.round(aux.getPresion() * 100d) / 100d)+" mbar");
     }
 
     @FXML
     private void accionBotonBorrar(ActionEvent event) {
-        
+        listaObs.remove(lvLista.getSelectionModel().getSelectedItem());
+        lvLista.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void accionBotonActualizar(ActionEvent event) {
         
+    }
+    
+    private boolean soloNumeros(String tf) {
+        return (tf.matches("[0-9]*"));
     }
     
 }
