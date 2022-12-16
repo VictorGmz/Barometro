@@ -7,6 +7,7 @@ package com.grupon5.barometro;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ public class VistaBarometroController implements Initializable {
         ObservableList<String> combo = FXCollections.observableArrayList();
         
         ArrayList<Barometro> presiones = new ArrayList<>();
+        private ChangeListener<Barometro> barometroChange;
     @FXML
     private Button btnNuevo;
     @FXML
@@ -75,6 +77,17 @@ public class VistaBarometroController implements Initializable {
                 } else {tfAltura.setText(old);}
             } else {tfAltura.setText("");}//En caso en el que neew sea "" o nulo, nos pondrá el valor a 0
         });
+        
+        lvLista.getSelectionModel().selectedItemProperty().
+                addListener(barometroChange = (observable, oldValue, newValue) -> {
+
+                    if (newValue != null) {
+                        tfPresion.setText(newValue.getPresion()+"");
+                        tfAltura.setText(newValue.getAltura()+"");
+                        dpFecha.setAccessibleText(newValue.getFecha());
+                        cbHora.setAccessibleText(newValue.getHora());
+                    }
+                });
     }    
 
     @FXML
