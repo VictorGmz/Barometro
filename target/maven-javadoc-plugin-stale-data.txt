@@ -1,0 +1,51 @@
+@options
+@packages
+@argfile
+--class-path
+'C:/Users/victo/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar;C:/Users/victo/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar;C:/Users/victo/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar;C:/Users/victo/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar;C:/Users/victo/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar'
+--module-path
+'C:/Users/victo/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar;C:/Users/victo/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar;C:/Users/victo/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-win.jar;C:/Users/victo/OneDrive/Documentos/NetBeansProjects/Barometro/target/classes;C:/Users/victo/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-win.jar'
+--patch-module
+com.grupon5.barometro='C:/Users/victo/OneDrive/Documentos/NetBeansProjects/Barometro/src/main/java'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+--module-source-path
+'C:/Users/victo/OneDrive/Documentos/NetBeansProjects/Barometro/target/site/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2022. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/victo/OneDrive/Documentos/NetBeansProjects/Barometro/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Barometro 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/victo/OneDrive/Documentos/NetBeansProjects/Barometro/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Barometro 1.0-SNAPSHOT API'
+com.grupon5.barometro
+'C:/Users/victo/OneDrive/Documentos/NetBeansProjects/Barometro/src/main/java/module-info.java'
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\allclasses-index.html = 1671289775397
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\allpackages-index.html = 1671289775403
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\element-list = 1671289775299
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\help-doc.html = 1671289775453
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\index-all.html = 1671289775444
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\index.html = 1671289775446
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\jquery-ui.overrides.css = 1671289775493
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\member-search-index.js = 1671289775415
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\module-search-index.js = 1671289775408
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\overview-tree.html = 1671289775371
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\package-search-index.js = 1671289775409
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\script.js = 1671289775458
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\search.js = 1671289775461
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\stylesheet.css = 1671289775457
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\tag-search-index.js = 1671289775416
+C:\Users\victo\OneDrive\Documentos\NetBeansProjects\Barometro\target\site\apidocs\type-search-index.js = 1671289775410

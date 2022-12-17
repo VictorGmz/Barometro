@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.grupon5.barometro","l":"com.grupon5.barometro"}];updateSearchResults();

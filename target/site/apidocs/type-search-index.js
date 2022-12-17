@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.grupon5.barometro","l":"App"},{"p":"com.grupon5.barometro","l":"Barometro"},{"p":"com.grupon5.barometro","l":"VistaBarometroController"}];updateSearchResults();
