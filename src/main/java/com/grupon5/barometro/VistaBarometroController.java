@@ -24,6 +24,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.TextAlignment;
 
 /**
  * FXML Controller class
@@ -63,6 +65,8 @@ public class VistaBarometroController implements Initializable {
     private Label labelPrecision;
     @FXML
     private Button btnCalibrador;
+    @FXML
+    private Label labelInfo;
 
     /**
      * Initializes the controller class.
@@ -82,6 +86,7 @@ public class VistaBarometroController implements Initializable {
         //Para los dos TextField forzamos a que únicamente entren numeros 
         //tipo Double
         tfAltura.textProperty().addListener((ov, old, neew) -> {
+            eliminaInfo();
             if (!"".equals(neew)) {//Se comprueba que el nuevo valor no sea "" o nulo
                 if (!neew.matches("\\d*(\\.\\d*)?")) {
                     tfAltura.setText(old);
@@ -91,6 +96,7 @@ public class VistaBarometroController implements Initializable {
             }
         });
         tfPresion.textProperty().addListener((ov, old, neew) -> {
+            eliminaInfo();
             if (!"".equals(neew)) {//Se comprueba que el nuevo valor no sea "" o nulo
                 if (!neew.matches("\\d*(\\.\\d*)?")) {
                     tfPresion.setText(old);
@@ -102,6 +108,7 @@ public class VistaBarometroController implements Initializable {
 
         lvLista.getSelectionModel().selectedItemProperty().
                 addListener(barometroChange = (observable, oldValue, newValue) -> {
+            eliminaInfo();
 
                     if (newValue != null) {
                         tfAltura.setText(newValue.getAltura() + "");
@@ -112,6 +119,13 @@ public class VistaBarometroController implements Initializable {
                 });
         btnBorrar.disableProperty().bind(
                 lvLista.getSelectionModel().selectedItemProperty().isNull()
+        );
+
+        btnNuevo.disableProperty().bind(
+                tfAltura.textProperty().isEqualTo("")
+                        .or(tfPresion.textProperty().isEqualTo(""))
+                        .or(cbHora.getSelectionModel().selectedItemProperty().isNull())
+                        .or(dpFecha.getEditor().textProperty().isEmpty())
         );
 
     }
@@ -135,7 +149,9 @@ public class VistaBarometroController implements Initializable {
      * @param event
      */
     @FXML
-    private void accionBotonNuevo(ActionEvent event) {
+    private void accionBotonNuevo(ActionEvent event) throws InterruptedException {
+        
+        eliminaInfo();
         tfAltura.setEditable(false);
         Barometro aux = new Barometro(dpFecha.getValue().toString(),
                 cbHora.getValue().toString(),
@@ -156,9 +172,7 @@ public class VistaBarometroController implements Initializable {
             }
         } else {
             aux = null;
-            Alert a = new Alert(Alert.AlertType.WARNING);
-            a.setContentText("¡¡Medidas repetidas!!");
-            a.show();
+            labelInfo.setText("Presión duplicada. No se puede añadir");
         }
     }
 
@@ -169,6 +183,8 @@ public class VistaBarometroController implements Initializable {
      */
     @FXML
     private void accionBotonBorrar(ActionEvent event) {
+        
+        eliminaInfo();
         listaObs.remove(lvLista.getSelectionModel().getSelectedItem());
         lvLista.getSelectionModel().clearSelection();
 
@@ -176,6 +192,7 @@ public class VistaBarometroController implements Initializable {
         tfAltura.setText("0");
         dpFecha.setValue(null);
         cbHora.setValue(null);
+        labelInfo.setText("Item eliminado.");
     }
 
     /**
@@ -224,5 +241,9 @@ public class VistaBarometroController implements Initializable {
     @FXML
     private void bloqueaAltura(MouseEvent event) {
         tfAltura.setEditable(true);
+    }
+
+    private void eliminaInfo() {
+        labelInfo.setText("");
     }
 }
