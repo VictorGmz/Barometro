@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -24,8 +23,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.TextAlignment;
 
 /**
  * FXML Controller class
@@ -79,7 +76,7 @@ public class VistaBarometroController implements Initializable {
         lvLista.setItems(listaObs);
         //Mete los Strings con la hora al combo box
         combosetItems();
-        botonCalibrador();
+        anyadirImagenes();
         //Comenzamos a nivel del mar
         tfAltura.setText("0");
 
@@ -208,7 +205,7 @@ public class VistaBarometroController implements Initializable {
 
         String precisionPrediccion;
         //Datos necesarios para prediccion
-        if (listaObs.size() < 10 || listaObs.isEmpty()) {
+        if (listaObs.size() < 24 || listaObs.isEmpty()) {
             Image icon = new Image(ruta + "error-icon.png");
             ivIcono.setImage(icon);
             labelPrecision.setText("Datos insuficientes");
@@ -231,12 +228,18 @@ public class VistaBarometroController implements Initializable {
             }
         }
     }
-    //Metemos icopno en el boton calibrador
-    public void botonCalibrador() {
-        Image icon = new Image(ruta+"padlock-icon.png",24,24,false,true);
+    //Metemos iconos en los botones correspondientes
+    
+    public void anyadirImagenes() {
+        Image icon = new Image(ruta+"plus.png",24,24,false,true);
+        btnNuevo.setGraphic(new ImageView(icon));
+        icon = new Image(ruta+"padlock-icon.png",24,24,false,true);
         btnCalibrador.setGraphic(new ImageView(icon));
+        icon = new Image(ruta+"delete.png",24,24,false,true);
+        btnBorrar.setGraphic(new ImageView(icon));
+        icon = new Image(ruta+"medidor-de-agua.png",24,24,false,true);
+        btnPrediccion.setGraphic(new ImageView(icon));
     }
-
     //Permite poder modificar la altura de nuevo
     @FXML
     private void bloqueaAltura(MouseEvent event) {

@@ -7,7 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : victo
 */
 #panelPrincipal {
-    -fx-background-color: linear-gradient(to right, #FFE6C35F 0%, white 100%)
+    -fx-background-color: linear-gradient(to right, #FFE6C3 0%, white 100%)
 }
 #lvLista{
     -fx-background-color: linear-gradient(to bottom, #FFE6C3 0%, white 100%)
