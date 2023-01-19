@@ -59,11 +59,12 @@ public class VistaBarometroController implements Initializable {
     @FXML
     private Button btnPrediccion;
     @FXML
-    private Label labelPrecision;
+    private Label lbPrediccion;
     @FXML
     private Button btnCalibrador;
     @FXML
-    private Label labelInfo;
+    private Label lbInfo;
+    
 
     /**
      * Initializes the controller class.
@@ -169,7 +170,7 @@ public class VistaBarometroController implements Initializable {
             }
         } else {
             aux = null;
-            labelInfo.setText("Presión duplicada. No se puede añadir");
+            lbInfo.setText("Presión duplicada. No se puede añadir");
         }
     }
 
@@ -189,7 +190,7 @@ public class VistaBarometroController implements Initializable {
         tfAltura.setText("0");
         dpFecha.setValue(null);
         cbHora.setValue(null);
-        labelInfo.setText("Item eliminado.");
+        lbInfo.setText("Item eliminado.");
     }
 
     /**
@@ -208,7 +209,7 @@ public class VistaBarometroController implements Initializable {
         if (listaObs.size() < 24 || listaObs.isEmpty()) {
             Image icon = new Image(ruta + "error-icon.png");
             ivIcono.setImage(icon);
-            labelPrecision.setText("Datos insuficientes");
+            lbPrediccion.setText("Datos insuficientes");
         } else {
             //"Cuando sube la presión, te puedes ir de excursión"
             if (mediaPredicciones < presion) {
@@ -222,9 +223,9 @@ public class VistaBarometroController implements Initializable {
             //Si hay mucha variación entre la presion a nivel del mar y la media
             //de los datos obtenidos se dice que será más probable que pase
             if (Math.abs(mediaPredicciones - presion) < 10) {
-                labelPrecision.setText("Poco probable");
+                lbPrediccion.setText("Poco probable");
             } else {
-                labelPrecision.setText("Es probable");
+                lbPrediccion.setText("Es probable");
             }
         }
     }
@@ -247,6 +248,6 @@ public class VistaBarometroController implements Initializable {
     }
 
     private void eliminaInfo() {
-        labelInfo.setText("");
+        lbInfo.setText("");
     }
 }
