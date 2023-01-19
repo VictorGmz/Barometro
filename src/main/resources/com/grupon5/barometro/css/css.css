@@ -1,0 +1,32 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 17 dic 2022, 15:50:06
+    Author     : victo
+*/
+#panelPrincipal {
+    -fx-background-color: linear-gradient(to right, #FFE6C3 0%, white 100%)
+}
+#lvLista{
+    -fx-background-color: linear-gradient(to bottom, #FFE6C3 0%, white 100%)
+}
+.button {
+     -fx-background-color:transparent;
+}
+.button:focused{
+     -fx-background-color:#6200EE1F;
+}
+
+.button:hover{
+     -fx-background-color:#6200EE2F;
+}
+
+.button:pressed{
+     -fx-background-color:#6200EE3F;
+}
+
+.button:disabled{
+     -fx-text-fill:gray;
+}
