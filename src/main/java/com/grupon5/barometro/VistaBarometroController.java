@@ -63,8 +63,15 @@ public class VistaBarometroController implements Initializable {
     @FXML
     private Button btnCalibrador;
     @FXML
-    private Label lbInfo;
-    
+    private Label lbInfo; 
+    @FXML
+    private Label lbAltura;
+    @FXML
+    private Label lbFecha;
+    @FXML
+    private Label lbHora;
+    @FXML
+    private Label lbPresion;
 
     /**
      * Initializes the controller class.

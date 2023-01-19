@@ -6,7 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Created on : 17 dic 2022, 15:50:06
     Author     : victo
 */
-#panelPrincipal {
+#panelPrincipal, #panelSuperior {
     -fx-background-color: linear-gradient(to right, #FFE6C3 0%, white 100%)
 }
 #lvLista{
