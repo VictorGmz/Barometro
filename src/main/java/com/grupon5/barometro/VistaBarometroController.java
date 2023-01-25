@@ -4,21 +4,26 @@
  */
 package com.grupon5.barometro;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,39 +44,60 @@ public class VistaBarometroController implements Initializable {
     private ChangeListener<Barometro> barometroChange;
     LocalDate dia;
     String ruta = "com/grupon5/barometro/iconosBarometro/";
-    
-    @FXML
-    private Button btnNuevo;
+    int idioma=0;
     @FXML
     private Button btnBorrar;
-    @FXML
-    private ListView<Barometro> lvLista;
-    @FXML
-    private ImageView ivIcono;
-    @FXML
-    private TextField tfPresion;
-    @FXML
-    private TextField tfAltura;
-    @FXML
-    private DatePicker dpFecha;
-    @FXML
-    private ComboBox cbHora;
-    @FXML
-    private Button btnPrediccion;
-    @FXML
-    private Label lbPrediccion;
+
     @FXML
     private Button btnCalibrador;
+
     @FXML
-    private Label lbInfo; 
+    private Button btnIdioma;
+
+    @FXML
+    private Button btnNuevo;
+
+    @FXML
+    private Button btnPrediccion;
+
+    @FXML
+    private ComboBox<String> cbHora;
+
+    @FXML
+    private DatePicker dpFecha;
+
+    @FXML
+    private ImageView ivIcono;
+
     @FXML
     private Label lbAltura;
+
     @FXML
     private Label lbFecha;
+
     @FXML
     private Label lbHora;
+
+    @FXML
+    private Label lbInfo;
+
+    @FXML
+    private Label lbPrediccion;
+
     @FXML
     private Label lbPresion;
+
+    @FXML
+    private ListView<Barometro> lvLista;
+
+    @FXML
+    private ProgressBar progresBar;
+
+    @FXML
+    private TextField tfAltura;
+
+    @FXML
+    private TextField tfPresion;
 
     /**
      * Initializes the controller class.
@@ -79,8 +105,19 @@ public class VistaBarometroController implements Initializable {
      * @param url
      * @param rb
      */
+    private FXMLLoader getFXMLLoader() {
+        FXMLLoader loader = new FXMLLoader();
+        //Le da a nuestro FXMLLoder la dirección del archivo .properties
+        loader.setResources(ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                Locale.getDefault()));
+        //Le cambia la location al fxml. Para que vuelva a cargarse en el idioma deseado
+        loader.setLocation(getClass().getResource("vistaBarometro.fxml"));
+        return loader;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Locale localActual = Locale.getDefault();
         lvLista.setItems(listaObs);
         //Mete los Strings con la hora al combo box
         combosetItems();
@@ -132,7 +169,6 @@ public class VistaBarometroController implements Initializable {
                         .or(cbHora.getSelectionModel().selectedItemProperty().isNull())
                         .or(dpFecha.getEditor().textProperty().isEmpty())
         );
-
     }
 
     /**
@@ -155,7 +191,6 @@ public class VistaBarometroController implements Initializable {
      */
     @FXML
     private void accionBotonNuevo(ActionEvent event) throws InterruptedException {
-        
         eliminaInfo();
         tfAltura.setEditable(false);
         Barometro aux = new Barometro(dpFecha.getValue().toString(),
@@ -257,4 +292,35 @@ public class VistaBarometroController implements Initializable {
     private void eliminaInfo() {
         lbInfo.setText("");
     }
+    
+    @FXML
+    void cambioIdioma(ActionEvent event) {
+
+        switch(idioma){
+            case 0:
+                Locale.setDefault(Locale.ENGLISH);
+                break;
+            case 1:
+                Locale.setDefault(Locale.FRENCH);
+                break;
+            case 2:
+                Locale.setDefault(Locale.ITALIAN);
+                break;
+            case 3:
+                Locale.setDefault(new Locale("es"));
+                break;
+        }
+       try {
+                    //Creamos un nuevo Parent con la nueva Localización
+                    Parent pane = getFXMLLoader().load();
+                    //Cargamos este parent en nuestra vista
+                    App.getPrimaryStage().getScene().setRoot(pane);
+                } catch (IOException ieo) {
+                }
+                //Mostramos nuestra vista
+                App.getPrimaryStage().show();
+        
+        
+    }
+    
 }
