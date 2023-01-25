@@ -105,19 +105,19 @@ public class VistaBarometroController implements Initializable {
      * @param url
      * @param rb
      */
-    private FXMLLoader getFXMLLoader() {
+    /*private FXMLLoader getFXMLLoader() {
         FXMLLoader loader = new FXMLLoader();
         //Le da a nuestro FXMLLoder la dirección del archivo .properties
-        loader.setResources(ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+        /*loader.setResources(ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
                 Locale.getDefault()));
         //Le cambia la location al fxml. Para que vuelva a cargarse en el idioma deseado
         loader.setLocation(getClass().getResource("vistaBarometro.fxml"));
         return loader;
-    }
+    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Locale localActual = Locale.getDefault();
+        //Locale localActual = Locale.getDefault();
         lvLista.setItems(listaObs);
         //Mete los Strings con la hora al combo box
         combosetItems();
@@ -295,31 +295,31 @@ public class VistaBarometroController implements Initializable {
     
     @FXML
     void cambioIdioma(ActionEvent event) {
-
-        switch(idioma){
-            case 0:
-                Locale.setDefault(Locale.ENGLISH);
-                break;
-            case 1:
-                Locale.setDefault(Locale.FRENCH);
-                break;
-            case 2:
-                Locale.setDefault(Locale.ITALIAN);
-                break;
-            case 3:
-                Locale.setDefault(new Locale("es"));
-                break;
-        }
-       try {
-                    //Creamos un nuevo Parent con la nueva Localización
-                    Parent pane = getFXMLLoader().load();
-                    //Cargamos este parent en nuestra vista
-                    App.getPrimaryStage().getScene().setRoot(pane);
-                } catch (IOException ieo) {
-                }
-                //Mostramos nuestra vista
-                App.getPrimaryStage().show();
-        
+//
+//        switch(idioma){
+//            case 0:
+//                Locale.setDefault(Locale.ENGLISH);
+//                break;
+//            case 1:
+//                Locale.setDefault(Locale.FRENCH);
+//                break;
+//            case 2:
+//                Locale.setDefault(Locale.ITALIAN);
+//                break;
+//            case 3:
+//                Locale.setDefault(new Locale("es"));
+//                break;
+//        }
+//       try {
+//                    //Creamos un nuevo Parent con la nueva Localización
+//                    Parent pane = getFXMLLoader().load();
+//                    //Cargamos este parent en nuestra vista
+//                    App.getPrimaryStage().getScene().setRoot(pane);
+//                } catch (IOException ieo) {
+//                }
+//                //Mostramos nuestra vista
+//                App.getPrimaryStage().show();
+//        
         
     }
     
