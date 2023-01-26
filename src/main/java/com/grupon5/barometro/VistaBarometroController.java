@@ -1,5 +1,3 @@
-
-
 package com.grupon5.barometro;
 
 import java.io.IOException;
@@ -26,6 +24,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -42,7 +42,7 @@ public class VistaBarometroController implements Initializable {
     private ChangeListener<Barometro> barometroChange;
     LocalDate dia;
     String ruta = "com/grupon5/barometro/iconosBarometro/";
-    int idioma=0;
+    int idioma;
     @FXML
     private Button btnBorrar;
 
@@ -103,19 +103,38 @@ public class VistaBarometroController implements Initializable {
      * @param url
      * @param rb
      */
-    /*private FXMLLoader getFXMLLoader() {
+    private FXMLLoader getFXMLLoader() {
         FXMLLoader loader = new FXMLLoader();
         //Le da a nuestro FXMLLoder la dirección del archivo .properties
-        /*loader.setResources(ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+        loader.setResources(ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
                 Locale.getDefault()));
         //Le cambia la location al fxml. Para que vuelva a cargarse en el idioma deseado
         loader.setLocation(getClass().getResource("vistaBarometro.fxml"));
         return loader;
-    }*/
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Locale localActual = Locale.getDefault();
+
+        Image icon;
+        switch (Locale.getDefault().toString()) {
+            case "en":
+                icon = new Image(ruta + "reino-unido.png", 32, 32, false, true);
+                btnIdioma.setGraphic(new ImageView(icon));
+                break;
+            case "fr":
+                icon = new Image(ruta + "francia.png", 32, 32, false, true);
+                btnIdioma.setGraphic(new ImageView(icon));
+                break;
+            case "it":
+                icon = new Image(ruta + "italia.png", 32, 32, false, true);
+                btnIdioma.setGraphic(new ImageView(icon));
+                break;
+            default:
+                icon = new Image(ruta + "espana.png", 32, 32, false, true);
+                btnIdioma.setGraphic(new ImageView(icon));
+                break;
+        }
         lvLista.setItems(listaObs);
         //Mete los Strings con la hora al combo box
         combosetItems();
@@ -148,7 +167,7 @@ public class VistaBarometroController implements Initializable {
 
         lvLista.getSelectionModel().selectedItemProperty().
                 addListener(barometroChange = (observable, oldValue, newValue) -> {
-            eliminaInfo();
+                    eliminaInfo();
 
                     if (newValue != null) {
                         tfAltura.setText(newValue.getAltura() + "");
@@ -221,7 +240,7 @@ public class VistaBarometroController implements Initializable {
      */
     @FXML
     private void accionBotonBorrar(ActionEvent event) {
-        
+
         eliminaInfo();
         listaObs.remove(lvLista.getSelectionModel().getSelectedItem());
         lvLista.getSelectionModel().clearSelection();
@@ -270,17 +289,18 @@ public class VistaBarometroController implements Initializable {
         }
     }
     //Metemos iconos en los botones correspondientes
-    
+
     public void anyadirImagenes() {
-        Image icon = new Image(ruta+"plus.png",24,24,false,true);
+        Image icon = new Image(ruta + "plus.png", 24, 24, false, true);
         btnNuevo.setGraphic(new ImageView(icon));
-        icon = new Image(ruta+"padlock-icon.png",24,24,false,true);
+        icon = new Image(ruta + "padlock-icon.png", 24, 24, false, true);
         btnCalibrador.setGraphic(new ImageView(icon));
-        icon = new Image(ruta+"delete.png",24,24,false,true);
+        icon = new Image(ruta + "delete.png", 24, 24, false, true);
         btnBorrar.setGraphic(new ImageView(icon));
-        icon = new Image(ruta+"medidor-de-agua.png",24,24,false,true);
+        icon = new Image(ruta + "medidor-de-agua.png", 24, 24, false, true);
         btnPrediccion.setGraphic(new ImageView(icon));
     }
+
     //Permite poder modificar la altura de nuevo
     @FXML
     private void bloqueaAltura(MouseEvent event) {
@@ -290,35 +310,31 @@ public class VistaBarometroController implements Initializable {
     private void eliminaInfo() {
         lbInfo.setText("");
     }
-    
+
     @FXML
     void cambioIdioma(ActionEvent event) {
-//
-//        switch(idioma){
-//            case 0:
-//                Locale.setDefault(Locale.ENGLISH);
-//                break;
-//            case 1:
-//                Locale.setDefault(Locale.FRENCH);
-//                break;
-//            case 2:
-//                Locale.setDefault(Locale.ITALIAN);
-//                break;
-//            case 3:
-//                Locale.setDefault(new Locale("es"));
-//                break;
-//        }
-//       try {
-//                    //Creamos un nuevo Parent con la nueva Localización
-//                    Parent pane = getFXMLLoader().load();
-//                    //Cargamos este parent en nuestra vista
-//                    App.getPrimaryStage().getScene().setRoot(pane);
-//                } catch (IOException ieo) {
-//                }
-//                //Mostramos nuestra vista
-//                App.getPrimaryStage().show();
-//        
-        
+        switch (Locale.getDefault().toString()) {
+            case "en":
+                Locale.setDefault(Locale.FRENCH);
+                break;
+            case "fr":
+                Locale.setDefault(Locale.ITALIAN);
+                break;
+            case "it":
+                Locale.setDefault(new Locale("es_ES"));
+                break;
+            default:
+                Locale.setDefault(Locale.ENGLISH);
+                break;
+        }
+        try {
+            //Creamos un nuevo Parent con la nueva Localización
+            Parent pane = getFXMLLoader().load();
+            //Cargamos este parent en nuestra vista
+            App.getPrimaryStage().getScene().setRoot(pane);
+        } catch (IOException ieo) {
+        }
+        //Mostramos nuestra vista
+        App.getPrimaryStage().show();
     }
-    
 }
