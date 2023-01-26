@@ -6,7 +6,9 @@ package com.grupon5.barometro;
 
 import static java.lang.Math.pow;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -21,12 +23,15 @@ public class Barometro {
     private double presion;
     private LocalDate fechaLocal;
 
+    
+    ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                Locale.getDefault());
     @Override
     public String toString() {
-        return fecha + "\t\t" + hora
-                + "\nAltura: " + altura
-                + " m\nPresión: " + presion
-                + " mbar\nPresión: " + ((double) Math.round((presion / 1.333300001162309) * 100d) / 100d) + " mmHg";
+        return fecha + "\t\t" + hora 
+                + "\n" +rb.getString("altura") +": "+altura
+                + " m\n"+rb.getString("presion") +": "+ presion
+                + " mbar\n"+rb.getString("presion")+": "+ ((double) Math.round((presion / 1.333300001162309) * 100d) / 100d) + " mmHg";
     }
 
     public double getCONSTANTE() {

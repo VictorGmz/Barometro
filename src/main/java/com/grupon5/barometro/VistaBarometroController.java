@@ -5,6 +5,8 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Properties;
+import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
@@ -229,7 +231,9 @@ public class VistaBarometroController implements Initializable {
             }
         } else {
             aux = null;
-            lbInfo.setText("Presión duplicada. No se puede añadir");
+           ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                Locale.getDefault());
+            lbInfo.setText(rb.getString("lbInfo1"));
         }
     }
 
@@ -249,7 +253,9 @@ public class VistaBarometroController implements Initializable {
         tfAltura.setText("0");
         dpFecha.setValue(null);
         cbHora.setValue(null);
-        lbInfo.setText("Item eliminado.");
+           ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                Locale.getDefault());
+            lbInfo.setText(rb.getString("lbInfo2"));
     }
 
     /**
@@ -260,15 +266,16 @@ public class VistaBarometroController implements Initializable {
      */
     @FXML
     private void accionBotonPrediccion(ActionEvent event) {
+        
+           ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                Locale.getDefault());
         double presion = (new Barometro("", "", Double.parseDouble(tfAltura.getText()))).getPresion();
         //Definimos un string con la ruta donde se encuentran nuestros iconos
-
-        String precisionPrediccion;
         //Datos necesarios para prediccion
         if (listaObs.size() < 24 || listaObs.isEmpty()) {
             Image icon = new Image(ruta + "error-icon.png");
             ivIcono.setImage(icon);
-            lbPrediccion.setText("Datos insuficientes");
+            lbPrediccion.setText(rb.getString("lbPrediccion3"));
         } else {
             //"Cuando sube la presión, te puedes ir de excursión"
             if (mediaPredicciones < presion) {
@@ -282,9 +289,9 @@ public class VistaBarometroController implements Initializable {
             //Si hay mucha variación entre la presion a nivel del mar y la media
             //de los datos obtenidos se dice que será más probable que pase
             if (Math.abs(mediaPredicciones - presion) < 10) {
-                lbPrediccion.setText("Poco probable");
+            lbPrediccion.setText(rb.getString("lbPrediccion1"));
             } else {
-                lbPrediccion.setText("Es probable");
+            lbPrediccion.setText(rb.getString("lbPrediccion2"));
             }
         }
     }
