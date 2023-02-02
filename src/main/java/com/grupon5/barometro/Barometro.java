@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
  */
 public class Barometro {
 
-    private final double CONSTANTE = 1013.25;
+    private static final double CONSTANTE = 1013.25;
     private String fecha;
     private String hora;
     private double altura;
@@ -34,9 +34,6 @@ public class Barometro {
                 + " mbar\n"+rb.getString("presion")+": "+ ((double) Math.round((presion / 1.333300001162309) * 100d) / 100d) + " mmHg";
     }
 
-    public double getCONSTANTE() {
-        return CONSTANTE;
-    }
 
     public Barometro (String fecha, String hora, double altura, double presion){
         this.fecha = fecha;

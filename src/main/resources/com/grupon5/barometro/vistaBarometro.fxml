@@ -37,7 +37,11 @@
       </AnchorPane>
    </top>
    <bottom>
-      <ProgressBar fx:id="progresBar" prefHeight="18.0" prefWidth="821.0" progress="0.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="panelInferior" BorderPane.alignment="CENTER">
+         <children>
+            <ProgressBar fx:id="progresBar" prefHeight="18.0" prefWidth="821.0" progress="0.0" />
+         </children>
+      </AnchorPane>
    </bottom>
    <left>
       <AnchorPane fx:id="panelIz" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="298.0" BorderPane.alignment="CENTER">
@@ -77,7 +81,7 @@
                         <Insets right="7.0" />
                      </GridPane.margin>
                   </Button>
-                  <TextField fx:id="tfAltura" prefHeight="25.0" prefWidth="216.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="tfAltura" accessibleHelp="Altura" accessibleRoleDescription="Altura" accessibleText="Altura" prefHeight="25.0" prefWidth="216.0" GridPane.columnIndex="1" />
                   <Label fx:id="lbPresion" nodeOrientation="RIGHT_TO_LEFT" prefHeight="42.0" prefWidth="190.0" text="%lbPresion" textAlignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font size="24.0" />
@@ -101,7 +105,7 @@
             <Button id="btnNuevo" fx:id="btnNuevo" layoutX="107.0" layoutY="335.0" mnemonicParsing="false" onAction="#accionBotonNuevo" prefHeight="42.0" prefWidth="103.0" stylesheets="@css/css.css" text="%btnNuevo" />
             <Button id="btnBorrar" fx:id="btnBorrar" layoutX="218.0" layoutY="335.0" mnemonicParsing="false" onAction="#accionBotonBorrar" prefHeight="42.0" prefWidth="103.0" stylesheets="@css/css.css" text="%btnBorrar" />
             <Button fx:id="btnPrediccion" layoutX="329.0" layoutY="335.0" mnemonicParsing="false" onAction="#accionBotonPrediccion" prefHeight="42.0" prefWidth="103.0" stylesheets="@css/css.css" text="%btnPrediccion" />
-            <Label fx:id="lbInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="301.0" prefHeight="34.0" prefWidth="347.0" textFill="RED">
+            <Label fx:id="lbInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="301.0" prefHeight="34.0" prefWidth="499.0" textFill="RED">
                <font>
                   <Font size="16.0" />
                </font>

@@ -16,6 +16,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 #panelSuperior {
     -fx-background-color: linear-gradient(to right, #FFE6C3 0%,white 40%, #FFE6C3 100%);
 }
+#panelInferior {
+    -fx-background-color: linear-gradient(to right, #FFE6C3 0%,white 40%, #FFE6C3 100%);
+}
 
 .button {
      -fx-background-color:transparent;

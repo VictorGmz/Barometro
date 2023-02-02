@@ -5,12 +5,11 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Properties;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,8 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -70,22 +68,10 @@ public class VistaBarometroController implements Initializable {
     private ImageView ivIcono;
 
     @FXML
-    private Label lbAltura;
-
-    @FXML
-    private Label lbFecha;
-
-    @FXML
-    private Label lbHora;
-
-    @FXML
     private Label lbInfo;
 
     @FXML
     private Label lbPrediccion;
-
-    @FXML
-    private Label lbPresion;
 
     @FXML
     private ListView<Barometro> lvLista;
@@ -98,6 +84,15 @@ public class VistaBarometroController implements Initializable {
 
     @FXML
     private TextField tfPresion;
+
+    @FXML
+    private AnchorPane panelDe;
+
+    @FXML
+    private AnchorPane panelIz;
+
+    @FXML
+    private AnchorPane panelSuperior;
 
     /**
      * Initializes the controller class.
@@ -114,11 +109,37 @@ public class VistaBarometroController implements Initializable {
         loader.setLocation(getClass().getResource("vistaBarometro.fxml"));
         return loader;
     }
+    private Task copyWorker;
+
+    public Task createWorker() {
+        return new Task() {
+            @Override
+            protected Object call() throws Exception {
+                for (int i = 0; i < 10; i++) {
+                    Thread.sleep(250);
+                    updateProgress(i + 1, 10);
+                }
+                progresBar.setVisible(false);
+                return true;
+            }
+        };
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        copyWorker = createWorker();
+
+        // Vinculamos el progreso del worker con la barra
+        progresBar.progressProperty().bind(copyWorker.progressProperty());
+
+        //Bloqueamos el resto de pantalla hasta que la progressBar finalice
+        panelDe.disableProperty().bind(progresBar.progressProperty().isNotEqualTo(1., 0.));
+        panelIz.disableProperty().bind(progresBar.progressProperty().isNotEqualTo(1., 0.));
+        panelSuperior.disableProperty().bind(progresBar.progressProperty().isNotEqualTo(1., 0.));
+        new Thread(copyWorker).start();
 
         Image icon;
+        //Seteamos la imagen correspondiente al idioma
         switch (Locale.getDefault().toString()) {
             case "en":
                 icon = new Image(ruta + "reino-unido.png", 32, 32, false, true);
@@ -231,8 +252,8 @@ public class VistaBarometroController implements Initializable {
             }
         } else {
             aux = null;
-           ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
-                Locale.getDefault());
+            ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                    Locale.getDefault());
             lbInfo.setText(rb.getString("lbInfo1"));
         }
     }
@@ -253,21 +274,21 @@ public class VistaBarometroController implements Initializable {
         tfAltura.setText("0");
         dpFecha.setValue(null);
         cbHora.setValue(null);
-           ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+        ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
                 Locale.getDefault());
-            lbInfo.setText(rb.getString("lbInfo2"));
+        lbInfo.setText(rb.getString("lbInfo2"));
     }
 
     /**
      * Estudia los datos obtenidos y los compara para darnos una predicción del
-     * tiempo que va a hacer. Además nos dice la precisión de dicha prediccin
+     * tiempo que va a hacer. Además nos dice la precisión de dicha predicción
      *
      * @param event
      */
     @FXML
     private void accionBotonPrediccion(ActionEvent event) {
-        
-           ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+
+        ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
                 Locale.getDefault());
         double presion = (new Barometro("", "", Double.parseDouble(tfAltura.getText()))).getPresion();
         //Definimos un string con la ruta donde se encuentran nuestros iconos
@@ -289,9 +310,9 @@ public class VistaBarometroController implements Initializable {
             //Si hay mucha variación entre la presion a nivel del mar y la media
             //de los datos obtenidos se dice que será más probable que pase
             if (Math.abs(mediaPredicciones - presion) < 10) {
-            lbPrediccion.setText(rb.getString("lbPrediccion1"));
+                lbPrediccion.setText(rb.getString("lbPrediccion1"));
             } else {
-            lbPrediccion.setText(rb.getString("lbPrediccion2"));
+                lbPrediccion.setText(rb.getString("lbPrediccion2"));
             }
         }
     }
