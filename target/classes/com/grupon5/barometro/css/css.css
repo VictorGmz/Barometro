@@ -13,21 +13,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 #panelIz, #lvLista {
     -fx-background-color: linear-gradient(to right, #FFE6C3 0%, white 100%);
 }
-#panelSuperior {
-    -fx-background-color: linear-gradient(to right, #FFE6C3 0%,white 40%, #FFE6C3 100%);
-}
-#panelInferior {
+#panelSuperior, #panelInferior {
     -fx-background-color: linear-gradient(to right, #FFE6C3 0%,white 40%, #FFE6C3 100%);
 }
 
 .button {
      -fx-background-color:transparent;
 }
-/*
+
 #panelPrincipal, #lvLista {
     -fx-background-color: linear-gradient(to right, #FFE6C3 0%, white 100%)
 }
-*/
+
 .button:focused{
      -fx-background-color:#6200EE1F;
 }

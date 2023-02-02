@@ -36,7 +36,7 @@ public class VistaBarometroController implements Initializable {
 
     ObservableList<Barometro> listaObs = FXCollections.observableArrayList();
     ObservableList<String> combo = FXCollections.observableArrayList();
-
+    ResourceBundle rb;
     ArrayList<Barometro> predicciones = new ArrayList<>();
     double mediaPredicciones = 0;
     private ChangeListener<Barometro> barometroChange;
@@ -128,7 +128,8 @@ public class VistaBarometroController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         copyWorker = createWorker();
-
+        rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                Locale.getDefault());
         // Vinculamos el progreso del worker con la barra
         progresBar.progressProperty().bind(copyWorker.progressProperty());
 
@@ -252,9 +253,10 @@ public class VistaBarometroController implements Initializable {
             }
         } else {
             aux = null;
-            ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+            rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
                     Locale.getDefault());
             lbInfo.setText(rb.getString("lbInfo1"));
+            lbInfo.setAccessibleText(rb.getString("lbInfo1"));
         }
     }
 
@@ -274,9 +276,10 @@ public class VistaBarometroController implements Initializable {
         tfAltura.setText("0");
         dpFecha.setValue(null);
         cbHora.setValue(null);
-        ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+        rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
                 Locale.getDefault());
         lbInfo.setText(rb.getString("lbInfo2"));
+        lbInfo.setAccessibleText(rb.getString("lbInfo2"));
     }
 
     /**
@@ -288,16 +291,16 @@ public class VistaBarometroController implements Initializable {
     @FXML
     private void accionBotonPrediccion(ActionEvent event) {
 
-        ResourceBundle rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
-                Locale.getDefault());
-        double presion = (new Barometro("", "", Double.parseDouble(tfAltura.getText()))).getPresion();
         //Definimos un string con la ruta donde se encuentran nuestros iconos
         //Datos necesarios para prediccion
         if (listaObs.size() < 24 || listaObs.isEmpty()) {
             Image icon = new Image(ruta + "error-icon.png");
             ivIcono.setImage(icon);
             lbPrediccion.setText(rb.getString("lbPrediccion3"));
+            lbPrediccion.setAccessibleText(rb.getString("lbPrediccion3"));
         } else {
+        double presion = (new Barometro("", "", Double.parseDouble(tfAltura.getText()))).getPresion();
+            
             //"Cuando sube la presión, te puedes ir de excursión"
             if (mediaPredicciones < presion) {
                 Image icon = new Image(ruta + "sun-icon.png");
@@ -311,8 +314,10 @@ public class VistaBarometroController implements Initializable {
             //de los datos obtenidos se dice que será más probable que pase
             if (Math.abs(mediaPredicciones - presion) < 10) {
                 lbPrediccion.setText(rb.getString("lbPrediccion1"));
+                lbPrediccion.setAccessibleText(rb.getString("lbPrediccion1"));
             } else {
                 lbPrediccion.setText(rb.getString("lbPrediccion2"));
+                lbPrediccion.setAccessibleText(rb.getString("lbPrediccion2"));
             }
         }
     }
