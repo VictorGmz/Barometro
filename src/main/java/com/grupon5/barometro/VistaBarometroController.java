@@ -290,36 +290,47 @@ public class VistaBarometroController implements Initializable {
      */
     @FXML
     private void accionBotonPrediccion(ActionEvent event) {
-
         //Definimos un string con la ruta donde se encuentran nuestros iconos
         //Datos necesarios para prediccion
+        String prediccion = "";
         if (listaObs.size() < 24 || listaObs.isEmpty()) {
             Image icon = new Image(ruta + "error-icon.png");
             ivIcono.setImage(icon);
             lbPrediccion.setText(rb.getString("lbPrediccion3"));
             lbPrediccion.setAccessibleText(rb.getString("lbPrediccion3"));
+            prediccion = "datos insuficientes";
         } else {
-        double presion = (new Barometro("", "", Double.parseDouble(tfAltura.getText()))).getPresion();
-            
-            //"Cuando sube la presión, te puedes ir de excursión"
-            if (mediaPredicciones < presion) {
-                Image icon = new Image(ruta + "sun-icon.png");
-                ivIcono.setImage(icon);
-            } //"Si la presión baja y viene mezquino, mejor quedarse en el casino"
-            else {
-                Image icon = new Image(ruta + "icons8-cloud-with-rain-48.png");
-                ivIcono.setImage(icon);
-            }
-            //Si hay mucha variación entre la presion a nivel del mar y la media
-            //de los datos obtenidos se dice que será más probable que pase
-            if (Math.abs(mediaPredicciones - presion) < 10) {
-                lbPrediccion.setText(rb.getString("lbPrediccion1"));
-                lbPrediccion.setAccessibleText(rb.getString("lbPrediccion1"));
-            } else {
-                lbPrediccion.setText(rb.getString("lbPrediccion2"));
-                lbPrediccion.setAccessibleText(rb.getString("lbPrediccion2"));
-            }
+            prediccion = prediccion();
         }
+    }
+
+    public String prediccion() {
+        String prediccion = "";
+        double presion = (new Barometro("", "", Double.parseDouble(tfAltura.getText()))).getPresion();
+
+        //"Cuando sube la presión, te puedes ir de excursión"
+        if (mediaPredicciones < presion) {
+            Image icon = new Image(ruta + "sun-icon.png");
+            ivIcono.setImage(icon);
+            prediccion = "Va a hacer bueno";
+        } //"Si la presión baja y viene mezquino, mejor quedarse en el casino"
+        else {
+            Image icon = new Image(ruta + "icons8-cloud-with-rain-48.png");
+            ivIcono.setImage(icon);
+            prediccion = "Va a hacer frio";
+        }
+        //Si hay mucha variación entre la presion a nivel del mar y la media
+        //de los datos obtenidos se dice que será más probable que pase
+        if (Math.abs(mediaPredicciones - presion) < 10) {
+            lbPrediccion.setText(rb.getString("lbPrediccion1"));
+            lbPrediccion.setAccessibleText(rb.getString("lbPrediccion1"));
+            prediccion += " pasajeramente";
+        } else {
+            lbPrediccion.setText(rb.getString("lbPrediccion2"));
+            lbPrediccion.setAccessibleText(rb.getString("lbPrediccion2"));
+            prediccion += " durante varias horas";
+        }
+        return prediccion;
     }
     //Metemos iconos en los botones correspondientes
 
