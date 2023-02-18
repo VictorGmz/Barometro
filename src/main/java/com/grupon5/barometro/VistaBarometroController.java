@@ -290,6 +290,8 @@ public class VistaBarometroController implements Initializable {
      */
     @FXML
     private void accionBotonPrediccion(ActionEvent event) {
+        rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                Locale.getDefault());
         //Definimos un string con la ruta donde se encuentran nuestros iconos
         //Datos necesarios para prediccion
         String prediccion = "";
