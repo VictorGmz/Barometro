@@ -138,4 +138,6 @@ public class Barometro {
     public void setPresion(double presion) {
         this.presion = presion;
     }
+    
+    
 }

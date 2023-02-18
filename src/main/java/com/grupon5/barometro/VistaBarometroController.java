@@ -290,22 +290,25 @@ public class VistaBarometroController implements Initializable {
      */
     @FXML
     private void accionBotonPrediccion(ActionEvent event) {
-
+        rb = ResourceBundle.getBundle("com.grupon5.barometro.i18n/cadenas",
+                Locale.getDefault());
         //Definimos un string con la ruta donde se encuentran nuestros iconos
         //Datos necesarios para prediccion
-        if (listaObs.size() < 24 || listaObs.isEmpty()) {
+        if (listaObs.size() < 24) {
             Image icon = new Image(ruta + "error-icon.png");
             ivIcono.setImage(icon);
             lbPrediccion.setText(rb.getString("lbPrediccion3"));
             lbPrediccion.setAccessibleText(rb.getString("lbPrediccion3"));
         } else {
-        double presion = (new Barometro("", "", Double.parseDouble(tfAltura.getText()))).getPresion();
-            
+            double presion = (new Barometro("", "",
+                    Double.parseDouble(tfAltura.getText()))).getPresion();
+
             //"Cuando sube la presión, te puedes ir de excursión"
             if (mediaPredicciones < presion) {
                 Image icon = new Image(ruta + "sun-icon.png");
                 ivIcono.setImage(icon);
-            } //"Si la presión baja y viene mezquino, mejor quedarse en el casino"
+            }
+            //"Si la presión baja y viene mezquino, mejor quedarse en el casino"
             else {
                 Image icon = new Image(ruta + "icons8-cloud-with-rain-48.png");
                 ivIcono.setImage(icon);
@@ -341,6 +344,9 @@ public class VistaBarometroController implements Initializable {
     }
 
     private void eliminaInfo() {
+        ivIcono.setImage(null);
+        lbPrediccion.setText("");
+        lbPrediccion.setAccessibleText("");
         lbInfo.setText("");
     }
 
