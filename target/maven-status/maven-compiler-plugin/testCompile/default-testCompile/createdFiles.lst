@@ -1,2 +1,4 @@
+com\grupon5\barometro\CucumberTest.class
 com\grupon5\barometro\BaromtroTest.class
 com\grupon5\barometro\BarometroParametrizedTest.class
+com\grupon5\barometro\CucumberRunnerTests.class

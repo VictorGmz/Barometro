@@ -51,13 +51,13 @@ public class BaromtroTest {
         assertEquals("Va a hacer frio durante varias horas", resultado);
     }
     /*
-    @Test() (expected = Error.class)
+    @Test
     public void test5(){
         double presion  = 0 ;
         double mediaPresiones = -1;
         VistaBarometroController t1 = new VistaBarometroController();
         String resultado = t1.prediccion(mediaPresiones, presion);
         assertEquals("Va a hacer frio durante varias horas", resultado);
-    }
-*/
+    }*/
+
 }

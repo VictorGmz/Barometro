@@ -6,7 +6,7 @@ package com.grupon5.barometro;
 
 /**
  *
- * @author victo
+ * @author Grupo N5
  */
 
 public class BarometroParametrizedTest {
